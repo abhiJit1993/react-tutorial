@@ -6,10 +6,11 @@ class IndecisionApp  extends  React.Component {
   render () { 
     const title = 'this is the header rendered through props object';
     const options = ['Item 1', 'Item 2', 'Item 3'];
+    const action = 'What should I do ?'
     return (
       <div>
 <Header title={title}/>
-<Action/>
+<Action action={action}/>
 <Options options={options}/>
 <AddOption/>
 
@@ -29,10 +30,14 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
+
+  handleOnClick () {
+    alert('clicked')
+  }
   render () {
     return (
       <div>
-      <button> What should I do ?</button>
+      <button onClick={this.handleOnClick}>{this.props.action}</button>
       </div>
    )
   }
@@ -48,10 +53,17 @@ render ()  {
 }
 }
 
+
 class Options extends React.Component { 
+  handleOnClick (){
+    alert('Hey')
+  }
   render () { 
     return  (
+      
+     
       <div>
+       <button onClick={this.handleOnClick}> Remove All </button>
       {
         this.props.options.map((option)=>{
           return <Option option={option}/>
@@ -63,10 +75,22 @@ class Options extends React.Component {
 }
 
 class AddOption  extends React.Component{
+  handleFormSubmit (e) {
+e.preventDefault();
+  const option = e.target.elements.option.value;
+  if(option){
+alert(option);
+e.target.elements.option.value = '';
+  }
+  
+  }
   render() {
     return  (
       <div> 
-    <button>Add Option </button>
+  <form onSubmit={this.handleFormSubmit}>
+  <input type='text' name='option' /> 
+   <button> Add Option</button>
+  </form>
       </div>
     )
   }
