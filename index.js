@@ -55,8 +55,11 @@ render ()  {
 
 
 class Options extends React.Component { 
+  constructor () {
+    this.handleOnClick =  this.handleOnClick.bind(this);
+  }
   handleOnClick (){
-    alert('Hey')
+  console.log(this.props)
   }
   render () { 
     return  (
